@@ -2,7 +2,8 @@ import time
 import unittest
 
 from tornado.ioloop import IOLoop
-from tornado.stack_context import ExceptionStackContext
+
+from my_application import delay_async
 
 
 class MyTestCase(unittest.TestCase):
@@ -15,16 +16,5 @@ class MyTestCase(unittest.TestCase):
             self.assertAlmostEqual(duration, 1, places=2)
             io_loop.stop()
 
-        self.failure = None
-
-        def handle_exception(typ, value, tb):
-            io_loop.stop()
-            self.failure = typ, value, tb
-
-        with ExceptionStackContext(handle_exception):
-            io_loop.add_timeout(start + 1, callback=done)
-
+        delay_async(1, done)
         io_loop.start()
-        if self.failure:
-            fail_typ, fail_value, fail_tb = self.failure
-            raise fail_value

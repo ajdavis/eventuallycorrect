@@ -27,4 +27,4 @@ class MyTestCase(unittest.TestCase):
         io_loop.start()
         if self.failure:
             fail_typ, fail_value, fail_tb = self.failure
-            raise fail_value.with_traceback(fail_tb)
+            raise fail_value
