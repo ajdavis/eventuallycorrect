@@ -2,6 +2,7 @@ import logging
 import time
 
 from tornado import testing
+from my_application import delay_async
 
 
 class MyTestCase(testing.AsyncTestCase):
@@ -11,12 +12,11 @@ class MyTestCase(testing.AsyncTestCase):
 
     def test_delay(self):
         start = time.time()
-        io_loop = self.io_loop
 
         def done():
             duration = time.time() - start
             self.assertAlmostEqual(duration, 1, places=2)
             self.stop()
 
-        io_loop.add_timeout(start + 2, callback=done)
+        delay_async(start + 1, callback=done)
         self.wait()
