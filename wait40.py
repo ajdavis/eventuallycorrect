@@ -4,6 +4,8 @@ import unittest
 from tornado.ioloop import IOLoop
 from tornado.stack_context import ExceptionStackContext
 
+from my_application import delay_async
+
 
 class MyTestCase(unittest.TestCase):
     def test_delay(self):
@@ -22,7 +24,7 @@ class MyTestCase(unittest.TestCase):
             self.failure = typ, value, tb
 
         with ExceptionStackContext(handle_exception):
-            io_loop.add_timeout(start + 1, callback=done)
+            delay_async(start + 1, callback=done)
 
         io_loop.start()
         if self.failure:
