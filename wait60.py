@@ -9,7 +9,7 @@ class MyTestCase(testing.AsyncTestCase):
         super().setUp()
         logging.getLogger('tornado').setLevel(logging.CRITICAL)
 
-    def test_sleep(self):
+    def test_delay(self):
         start = time.time()
         io_loop = self.io_loop
 

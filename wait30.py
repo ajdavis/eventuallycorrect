@@ -7,7 +7,7 @@ from my_application import delay_async
 
 
 class MyTestCase(unittest.TestCase):
-    def test_sleep(self):
+    def test_delay(self):
         start = time.time()
         io_loop = IOLoop.instance()
 
