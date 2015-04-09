@@ -24,7 +24,7 @@ class MyTestCase(unittest.TestCase):
             self.failure = typ, value, tb
 
         with ExceptionStackContext(handle_exception):
-            delay_async(start + 1, callback=done)
+            delay_async(1, callback=done)
 
         io_loop.start()
         if self.failure:

@@ -19,5 +19,5 @@ class MyTestCase(testing.AsyncTestCase):
             self.assertAlmostEqual(duration, 1, places=2)
             self.stop()
 
-        delay_async(start + 1, callback=done)
+        delay_async(1, callback=done)
         self.wait()
