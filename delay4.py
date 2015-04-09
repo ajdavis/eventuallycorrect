@@ -21,12 +21,11 @@ class MyTestCase(unittest.TestCase):
 
         def handle_exception(typ, value, tb):
             io_loop.stop()
-            self.failure = typ, value, tb
+            self.failure = value
 
         with ExceptionStackContext(handle_exception):
             delay_async(1, callback=done)
 
         io_loop.start()
         if self.failure:
-            fail_typ, fail_value, fail_tb = self.failure
-            raise fail_value
+            raise self.failure
