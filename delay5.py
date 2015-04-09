@@ -1,4 +1,3 @@
-import logging
 import time
 import unittest
 
@@ -9,10 +8,6 @@ from my_application import delay_async
 
 
 class MyTestCase(unittest.TestCase):
-    def setUp(self):
-        super().setUp()
-        logging.getLogger('tornado').setLevel(logging.CRITICAL)
-
     def test_delay(self):
         start = time.time()
         io_loop = IOLoop.instance()
@@ -27,6 +22,7 @@ class MyTestCase(unittest.TestCase):
         def handle_exception(typ, value, tb):
             io_loop.stop()
             self.failure = value
+            return True
 
         with ExceptionStackContext(handle_exception):
             delay_async(1, callback=done)
