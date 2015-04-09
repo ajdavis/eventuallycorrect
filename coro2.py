@@ -1,5 +1,3 @@
-import logging
-
 from motor import MotorClient
 from tornado import testing
 from tornado.testing import gen_test
@@ -8,7 +6,6 @@ from tornado.testing import gen_test
 class MyTestCase(testing.AsyncTestCase):
     def setUp(self):
         super().setUp()
-        logging.getLogger('tornado').setLevel(logging.CRITICAL)
         self.client = MotorClient()
 
     @gen_test
